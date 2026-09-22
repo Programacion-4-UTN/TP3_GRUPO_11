@@ -14,6 +14,19 @@ public class Principal {
 		DaoCategoria daoCat = new DaoCategoria();
         DaoProducto daoProd = new DaoProducto();
         
+     // Limpieza de tablas para reiniciar el estado de prueba
+        try {
+            java.sql.Connection cn = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/bdInventario", "root", "root");
+            java.sql.Statement st = cn.createStatement();
+            st.executeUpdate("DELETE FROM Productos");
+            st.executeUpdate("DELETE FROM Categorias");
+            st.close();
+            cn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        
         System.out.println("===============================================");
         System.out.println("  1. PRUEBA ABML DE CATEGORIAS");
         System.out.println("===============================================");
@@ -78,6 +91,7 @@ public class Principal {
             // Alta con Stored Procedure
             daoProd.agregarProductoSP(prod);
         }
+        System.out.println("Se ejecutó el alta de 10 productos mediante 'sp_AgregarProducto'.");
 
 	}
 
