@@ -56,6 +56,28 @@ public class Principal {
         // Obtenemos dos IDs válidos generados en la base de datos
         int idCat1 = listaCat.get(0).getIdCategoria();
         int idCat2 = (listaCat.size() > 1) ? listaCat.get(1).getIdCategoria() : idCat1;
+        
+        System.out.println("\n===============================================");
+        System.out.println("  2. CARGA DE 10 PRODUCTOS (CON STORED PROCEDURE)");
+        System.out.println("===============================================");
+
+        Producto[] loteProductos = new Producto[] {
+            new Producto("P001", "Leche Entera 1L", 1200.50, 50, idCat1),
+            new Producto("P002", "Yogur Frutilla 1L", 950.00, 30, idCat1),
+            new Producto("P003", "Queso Cremoso 1kg", 4500.00, 15, idCat1),
+            new Producto("P004", "Manteca 200g", 1800.00, 20, idCat1),
+            new Producto("P005", "Crema de Leche 200g", 1600.00, 25, idCat1),
+            new Producto("P006", "Agua Mineral 1.5L", 800.00, 100, idCat2),
+            new Producto("P007", "Gaseosa Cola 2L", 2200.00, 40, idCat2),
+            new Producto("P008", "Jugo de Naranja 1L", 1500.00, 35, idCat2),
+            new Producto("P009", "Cerveza Rubia 1L", 2800.00, 60, idCat2),
+            new Producto("P010", "Vino Tinto 750ml", 3500.00, 18, idCat2)
+        };
+
+        for (Producto prod : loteProductos) {
+            // Alta con Stored Procedure
+            daoProd.agregarProductoSP(prod);
+        }
 
 	}
 
