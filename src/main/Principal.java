@@ -93,6 +93,34 @@ public class Principal {
         }
         System.out.println("Se ejecutó el alta de 10 productos mediante 'sp_AgregarProducto'.");
 
-	}
+        
+        
+        System.out.println("ABML de Productos (Alta ya testeada con la carga de 10 productos)");
+        ArrayList<Producto> listaProd = daoProd.listarProductos();        
+        for(Producto p : listaProd) //recorre todos los p
+        { System.out.println(p); // usa el to string
+        	}
+        System.out.println("Prueba de modificacion");
+        if(!listaProd.isEmpty()) {
+        	Producto prodMod = listaProd.get(0);
+            prodMod.setNombre(prodMod.getNombre() + " (Modificada)");
+            daoProd.modificarProducto(prodMod);
+            System.out.println("\nProducto Codigo" + prodMod.getCodigo() + " modificado."); // en el nuevo listado muestro el nombre mod.
+        }
+        
+        
+        System.out.println("Prueba de Baja");
+       // Producto prodModificado = listaProd.get(listaProd.size() -1 ).getIdCategoria();
+        if (listaProd.size() >= 2) {
+            String codigoEliminar = listaProd.get(listaProd.size() - 1).getCodigo();
+            daoProd.eliminarProducto(codigoEliminar);
+            System.out.println("Producto Codigo " + codigoEliminar + " eliminado.");
+        } 
+        System.out.println("Prueba de Listado");
+        System.out.println("\n Listado Productos luego de modificación y baja:");
+        listaProd = daoProd.listarProductos();
+        for (Producto p : listaProd) {
+            System.out.println(p);
+	        }
 
-}
+}}
